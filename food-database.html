@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfghaNutri - Dashboard</title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Font Awesome or Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/food-database.css">
+</head>
+<body>
+    <!-- NAVIGATION SIDEBAR -->
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-header">
+                <div class="avatar-container">
+                    <img id="sidebarProfilePicture" src="images/blankProfilePicture.png" alt="Profile Avatar">
+                    <span class="status-dot"></span>
+                </div>
+
+                <h2 class="user-name" id="sidebarUserName"> -- </h2>
+                <p class="welcome-text">Welcome back to your health journey!</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie glow-icon"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="food-database.html" class="nav-link active-tab-container">
+                    <i class="fa-solid fa-database glow-icon"></i>
+                    <span>Foods</span>
+                </a>
+
+                <a href="food-log.html" class="nav-link">
+                    <i class="fa-solid fa-utensils glow-icon"></i>
+                    <span>Meal Log</span>
+                </a>
+
+                <a href="activity-log.html" class="nav-link">
+                    <i class="fa-solid fa-person-walking glow-icon"></i>
+                    <span>Activity Log</span>
+                </a>
+
+                <a href="progress.html" class="nav-link">
+                    <i class="fa-solid fa-arrow-trend-up glow-icon"></i>
+                    <span>Progress</span>
+                </a>
+
+                <a href="profile.html" class="nav-link">
+                    <i class="fa-regular fa-user glow-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="logo"></div>
+        </div>
+    </aside>
+
+    <!-- MAIN CANVAS -->
+    <main class="main-canvas">
+        <div class="food-canvas">
+            <!-- FOOD-BANNER HEADER -->
+            <header class="food-banner">
+                <div class="banner-content">
+                    <h1>Explore Afghan Dishes</h1>
+                    <p>Discover traditional Afghan meals, compare their nutritional values, and make informed choices before adding them to your daily food log.</p>
+                </div>
+                
+                <div class="banner-search-box">
+                    <i class="fa-solid fa-magnifying-glass search-bar-icon"></i>
+                    <input id="foodSearch" type="text" placeholder="Search foods" aria-label="Search food database">
+                </div>
+            </header>
+            
+            <!-- FOOD DISPLAY -->
+            <div class="food-display-showcase">
+                <!--- LEFT AREA: Content Values --->
+                <div class="showcase-content-left">
+
+                    <div class="food-header">
+                        <h2 id="foodTitle" class="showcase-title"> -- </h2>
+                        <span id="foodBadge" class="food-badge">Traditional Afghan Dish</span>
+                    </div>
+
+                    <p id="foodDescription" class="showcase-description"> -- </p>
+
+                    <div class="food-meta">
+                        <span><i class="fa-solid fa-utensils"></i> Serving: 400 g</span>
+                    </div>
+
+                    <!-- Nutrition -->
+                    <div class="nutrition-grid">
+
+                        <div class="nutrient calorie">
+                            <span class="label">Calories</span>
+                            <span id="foodCalories" class="value"> -- </span>
+                        </div>
+
+                        <div class="nutrient">
+                            <span class="label">Carbs</span>
+                            <span id="foodCarbs" class="value"> -- </span>
+                        </div>
+
+                        <div class="nutrient">
+                            <span class="label">Protein</span>
+                            <span id="foodProtein" class="value"> -- </span>
+                        </div>
+
+                        <div class="nutrient">
+                            <span class="label">Fat</span>
+                            <span id="foodFat" class="value"> -- </span>
+                        </div>
+
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="showcase-slider-nav">
+                        <span class="nav-arrow line-left"></span>
+                        <span id="previousFood" class="nav-text-label">Previous</span>
+                        <span id="nextFood" class="nav-text-label">Next</span>
+                        <span class="nav-arrow line-right"></span>
+                    </div>
+
+                </div>
+                
+                <!--- RIGHT AREA: Content Values --->
+                <div class="showcase-content-right">
+                    <div class="food-display">
+                        <svg class="arc-svg-track" viewBox="0 0 400 800">
+                            <path id="curve" d="M 400,0 A 400,400 0 0,0 400,800" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="6,8" />
+                        </svg>
+
+                        <div id="foodThumb1" class="thumb-track-item item-1">
+                            <div class="thumb-circle"><img id="thumbImage1" alt="food option"></div>
+                        </div>
+
+                        <div id="foodThumb2" class="thumb-track-item item-2">
+                            <div class="thumb-circle"><img id="thumbImage2" alt="food option"></div>
+                        </div>
+
+                        <div id="foodThumb3" class="thumb-track-item item-3">
+                            <div class="thumb-circle active-thumb"><img id="thumbImage3" alt="food option"></div>
+                        </div>
+
+                        <div id="foodThumb4" class="thumb-track-item item-4">
+                            <div class="thumb-circle"><img id="thumbImage4" alt="food option"></div>
+                        </div>
+
+                        <div id="foodThumb5" class="thumb-track-item item-5">
+                            <div class="thumb-circle"><img id="thumbImage5" alt="food option"></div>
+                        </div>
+
+                        <div id="foodThumb6" class="thumb-track-item item-incoming">
+                            <div class="thumb-circle"><img id="thumbImage6" alt="food option"></div>
+                        </div>
+
+                        <div class="bg-arc-bubble-backdrop"></div>
+
+                        <div class="main-food-plate-layer">
+                            <img id="mainFoodImage" alt="Food Selection">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </main>
+    <!-- CUSTOM POPUP -->
+    <div id="customPopup" class="custom-popup-overlay">
+        <div class="custom-popup">
+            <div class="popup-icon-wrapper">
+                <i id="popupIcon" class="fa-solid fa-xmark"></i>
+            </div>
+
+            <h3 id="popupTitle"></h3>
+            <p id="popupMessage"></p>
+            <button type="button" id="popupCloseBtn" class="popup-close-btn">Okay</button>
+        </div>
+    </div>
+    
+    <script src="js/food-database.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/session-timeout.js"></script>
+</body>
+</html>

@@ -1,0 +1,610 @@
+:root {
+    --primary-bg: #F8F4EC;
+    --sidebar-base: #d97706;
+    --sidebar-shade-1: #ea8a14;
+    --sidebar-shade-2: #f59e0b;
+    --sidebar-shade-3: #fbbf24;
+    --btn-color: #ea580c;
+    --btn-hover: #c2410c;
+    --text-dark: #5C0A0A;
+    --text-muted: #8c8c8c;
+    --white: #ffffff;
+    --card-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    --transition-speed: 0.4s;
+    --box-shadow: rgba(255, 149, 0, 0.3)
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--primary-bg);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.app-window {
+    width: 100%;
+    max-width: 950px;
+    display: block;
+}
+
+.glass-card {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: var(--card-shadow);
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    overflow: hidden;
+    min-height: 620px;
+    position: relative;
+}
+
+/* ================= LEFT SIDE  ================= */
+.sidebar-panel {
+    background-color: var(--sidebar-base);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end; 
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Layered 3D overlapping diagonal ribbons */
+.sidebar-panel .shade-layer {
+    position:absolute;
+    width: 150%;
+    height: 150%;
+    transform: rotate(-125deg);
+    box-shadow: 0 0 30px rgba(0,0,0,0.25);
+}
+
+.sidebar-panel .layer-1 {
+    background-color: var(--sidebar-shade-1);
+    top: 15%;
+    left: 5%;
+    z-index: -3;
+}
+
+.sidebar-panel .layer-2 {
+    background-color: var(--sidebar-shade-2);
+    top: 35%;
+    left: -10%;
+    z-index: -2;
+}
+
+.sidebar-panel .layer-3 {
+    background-color: var(--sidebar-shade-3);
+    top: 55%;
+    left: -25%;
+    z-index: -1;
+}
+
+/* Bubbly fluid interactive toggle system */
+.toggle-container {
+    width: 150px;
+    height: 130px;
+    background: transparent;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 5;
+    padding-left: 20px;
+}
+
+.toggle-btn {
+    height: 55px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+    line-height: 55px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 3;
+    transition: color var(--transition-speed) ease;
+}
+
+.toggle-btn.active {
+    color: var(--text-dark);
+}
+
+/* The Moving White Bubble Shape */
+.sliding-pill {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 130px;
+    height: 55px;
+    background: var(--white);
+    border-radius: 30px 0 0 30px;
+    z-index: 2;
+    transition: transform var(--transition-speed) cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.sliding-pill::before {
+    content: '';
+    position: absolute;
+    right: -3px;
+    top: -25px;
+    width: 25px;
+    height: 25px;
+    background: transparent;
+    border-radius: 0 0 25px 0;
+    box-shadow: 0 12px 0 0 var(--white);
+    pointer-events: none;
+    transition: transform var(--transition-speed);
+}
+
+.sliding-pill::after {
+    content: '';
+    position: absolute;
+    right: -3px;
+    bottom: -25px;
+    width: 25px;
+    height: 25px;
+    background: transparent;
+    border-radius: 0 25px 0 0;
+    box-shadow: 0 -12px 0 0 var(--white);
+    pointer-events: none;
+    transition: transform var(--transition-speed);
+}
+
+.toggle-container.signup-active .sliding-pill {
+    transform: translateY(75px);
+}
+
+/* ================= RIGHT SIDE FORM ================= */
+.form-content-viewport {
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--white);
+    position: relative;
+}
+
+/*----- VIEW A: Login Interface -----*/
+.form-view-panel {
+    display: none;
+    animation: formFadeIn 0.4s ease-in-out;
+}
+
+.form-view-panel.active {
+    display: block;
+}
+
+.login-badge-icon {
+    width: 75px;
+    height: 75px;
+    background: linear-gradient(135deg, var(--sidebar-shade-1), var(--btn-color));
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto 15px auto;
+    color: var(--white);
+    font-size: 1.8rem;
+    box-shadow: 0 5px 15px var(--box-shadow);
+}
+
+.login-main-title {
+    text-align: center;
+    color: var(--text-dark);
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+}
+
+.form-group {
+    margin-bottom: 22px;
+    position: relative;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 5px;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.form-control {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #dbdbdb;
+    padding: 10px 10px 10px 32px;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    background: transparent;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-bottom-color: var(--btn-color);
+}
+
+.btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: var(--btn-color);
+    color: var(--white);
+    box-shadow: 0 5px 15px var(--box-shadow);
+    margin-left: auto;
+}
+
+.btn-primary:hover {
+    background-color: var(--btn-hover);
+    transform: translateY(-3px);
+}
+
+.forgot-password-anchor {
+    text-align: right;
+    display: block;
+    font-size: 0.8rem;
+    color: var(--sidebar-shade-1);
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+.social-auth-footer {
+    margin-top: 35px;
+    border-top: 1px solid #ededed;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.social-links-row {
+    display: flex;
+    gap: 20px;
+}
+
+.social-anchor {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.social-anchor i.fa-google { color: #db4437; }
+.social-anchor i.fa-facebook { color: #4267b2; }
+
+/*----- VIEW B: Multi-step User Details -----*/
+
+/* Progress Line */
+.progress-wrapper {
+    margin-bottom: 30px;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.progress-steps::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #f0f0f0;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.progress-line-fill {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 3px;
+    background: var(--sidebar-shade-3);
+    transform: translateY(-50%);
+    z-index: 0;
+    width: 0%;
+    transition: width var(--transition-speed) ease;
+}
+
+.step-node {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    z-index: 1;
+    transition: all var(--transition-speed) ease;
+}
+
+.step-node.active {
+    background: var(--sidebar-shade-3);
+    color: var(--white);
+    box-shadow: 0 0 12px var(--box-shadow);
+}
+
+.step-node.completed {
+    background: var(--btn-color);
+    color: var(--white);
+}
+
+.btn-secondary {
+    background-color: #eaeaea;
+    color: var(--text-dark);
+}
+
+.btn-secondary:hover {
+    background-color: #dfdfdf;
+}
+
+/* Showing and Hidding Forms */
+.wizard-step {
+    display: none;
+    animation: stepSlide 0.4s ease-out;
+}
+
+.wizard-step.active {
+    display: block;
+}
+
+.step-title {
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.error-msg {
+    color: #DC2626;
+    font-size: 0.75rem;
+    margin-top: 5px;
+    display: none;
+}
+
+.form-group.has-error .form-control {
+    border-bottom-color: #DC2626;
+}
+
+.form-group.has-error .error-msg {
+    display: block;
+}
+
+.goal-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.goal-box {
+    border: 2px solid #eeeeee;
+    border-radius: 14px;
+    padding: 14px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.goal-box:hover {
+    border-color: var(--sidebar-shade-1);
+    background: rgba(242, 226, 209, 0.15);
+}
+
+.goal-box.selected {
+    border-color: var(--btn-color);
+    background: rgba(242, 226, 209, 0.35);
+}
+
+.goal-box i {
+    font-size: 1.3rem;
+    color: var(--btn-color);
+}
+
+.goal-text {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.goal-insight {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: green;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.target-insight {
+    display: none;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: green;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/*----- SUCCESS POPUP -----*/
+
+.success-popup{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.success-popup.active{
+    display: flex;
+}
+
+.success-box{
+    width: 420px;
+    max-width: 90%;
+    background: var(--white);
+    border-radius: 24px;
+    padding: 40px 35px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    animation: popupFade .35s ease;
+}
+
+.success-box i{
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    background: rgba(234, 138, 20, 0.12);
+    color: var(--btn-color);
+    font-size: 3rem;
+}
+
+.success-box h3{
+    color: var(--text-dark);
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.success-box p{
+    color: var(--text-muted);
+    font-size: .95rem;
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.success-box button{
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 25px;
+    background: var(--btn-color);
+    color: var(--white);
+    font-size: .95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .3s ease;
+    box-shadow: 0 5px 15px var(--box-shadow);
+}
+
+.success-box button:hover{
+    background: var(--btn-hover);
+    transform: translateY(-3px);
+}
+
+@keyframes popupFade{
+    from{
+        opacity:0;
+        transform: scale(.9);
+    }
+
+    to{
+        opacity:1;
+        transform: scale(1);
+    }
+}
+
+@keyframes formFadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes stepSlide {
+    from { opacity: 0; transform: translateX(15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 768px) {
+    .glass-card {
+        grid-template-columns: 1fr;
+    }
+    .sidebar-panel {
+        min-height: 120px;
+        align-items: center;
+        justify-content: center;
+        padding-right: 0;
+    }
+    .toggle-container {
+        transform: rotate(0deg);
+        flex-direction: row;
+        width: 260px;
+        height: 50px;
+    }
+    .sliding-pill {
+        width: 50%;
+        height: 100%;
+        border-radius: 25px;
+        left: 6px;
+        right: auto;
+    }
+    .sliding-pill::before, .sliding-pill::after {
+        display: none; /* Disable inverse curves on mobile layout stacking */
+    }
+    .toggle-container.signup-active .sliding-pill {
+        transform: translateY(0) translateX(100%);
+    }
+}

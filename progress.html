@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfghaNutri - Dashboard</title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Font Awesome or Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/progress.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- NAVIGATION SIDEBAR -->
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-header">
+                <div class="avatar-container">
+                    <img id="sidebarProfilePicture" src="images/blankProfilePicture.png" alt="Profile Avatar">
+                    <span class="status-dot"></span>
+                </div>
+
+                <h2 class="user-name" id="sidebarUserName"> -- </h2>
+
+                <p class="welcome-text">Welcome back to your health journey!</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie glow-icon"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="food-database.html" class="nav-link">
+                    <i class="fa-solid fa-database glow-icon"></i>
+                    <span>Foods</span>
+                </a>
+
+                <a href="food-log.html" class="nav-link">
+                    <i class="fa-solid fa-utensils glow-icon"></i>
+                    <span>Meal Log</span>
+                </a>
+
+                <a href="activity-log.html" class="nav-link">
+                    <i class="fa-solid fa-person-walking glow-icon"></i>
+                    <span>Activity Log</span>
+                </a>
+
+                <a href="progress.html" class="nav-link active-tab-container">
+                    <i class="fa-solid fa-arrow-trend-up glow-icon"></i>
+                    <span>Progress</span>
+                </a>
+
+                <a href="profile.html" class="nav-link">
+                    <i class="fa-regular fa-user glow-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="logo"></div>
+        </div>
+    </aside>
+
+    <!-- MAIN CANVAS --> 
+    <main class="main-canvas" id="progressMainCanvas"> 
+    
+        <!-- PROGRESS HEADER CARD --> 
+        <div class="page-header" id="progressHeader"> 
+            <div class="header-text" id="progressHeaderText"> 
+                <h1 id="progressTitle">Progress Overview</h1> 
+                <p id="progressDescription">Track your nutrition, weight, and activity trends over time. Monitor your achievements and stay on track with your health goals.</p> 
+            </div> 
+            
+            <div class="global-time-filter" id="progressTimeFilter"> 
+                <button type="button" class="filter-btn active" id="weekFilterBtn" onclick="updateDashboardTimeframe('week', this)">This Week</button> 
+                <button type="button" class="filter-btn" id="monthFilterBtn" onclick="updateDashboardTimeframe('month', this)">This Month</button> 
+                <button type="button" class="filter-btn" id="allFilterBtn" onclick="updateDashboardTimeframe('all', this)">All Time</button> 
+            </div> 
+        </div> 
+    
+        <!-- PROGRESS GRID SYSTEM --> 
+        <div class="progress-dashboard-grid" id="progressDashboardGrid"> 
+    
+            <!-- 1. Calorie Overview--> 
+            <div class="glass-card card-span-5" id="calorieOverviewCard"> 
+                <div class="card-header" id="calorieCardHeader"> 
+                    <h2 id="calorieOverviewTitle">Calorie Overview</h2> 
+                    <span class="card-badge" id="calorieBadge">Balanced</span> 
+                </div> 
+    
+                <div class="calorie-chart-layout" id="calorieChartLayout"> 
+                    <div class="chart-wrapper-donut" id="calorieDonutWrapper"> 
+                        <canvas id="calorieOverviewChart"></canvas> 
+                        <div class="donut-center-text" id="donutCenterText"> 
+                            <span id="donutNetVal"> -- </span> 
+                            <small id="donutNetLabel">Net kcal</small> 
+                        </div> 
+                    </div> 
+    
+                    <div class="calorie-stats-stack" id="calorieStatsStack"> 
+                        <div class="stat-pill consumed" id="consumedStatPill"> 
+                            <span class="dot"></span> 
+                            <div> 
+                                <small>Consumed</small> 
+                                <strong id="statConsumed"> -- kcal</strong> 
+                            </div> 
+                        </div> 
+    
+                        <div class="stat-pill burned" id="burnedStatPill"> 
+                            <span class="dot"></span> 
+                            <div> 
+                                <small>Burned</small> 
+                                <strong id="statBurned"> -- kcal</strong> 
+                            </div> 
+                        </div> 
+    
+                        <div class="stat-pill net" id="targetStatPill"> 
+                            <span class="dot"></span> 
+                            <div> 
+                                <small id="targetLimitLabel">Target Limit</small>
+                                <strong id="statTarget"> -- kcal</strong> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+    
+                <div class="insight-banner success" id="calorieInsight"> 
+                    <i class="fa-solid fa-circle-check"></i> 
+                    <span id="calorieInsightText"></span> 
+                </div> 
+            </div> 
+    
+            <!-- 2. Weight Trajectory and Prediction --> 
+            <div class="glass-card card-span-7" id="weightTrajectoryCard"> 
+                <div class="card-header" id="weightCardHeader"> 
+                    <h2 id="weightTrajectoryTitle">Weight Trajectory & Prediction</h2> 
+                    <div class="weight-legend" id="weightLegend"> 
+                        <span class="legend-item"><span class="line-dot actual"></span> Actual</span> 
+                        <span class="legend-item"><span class="line-dot target"></span> Target</span> 
+                    </div> 
+                </div> 
+    
+                <div class="chart-wrapper-line" id="weightChartWrapper"> 
+                    <canvas id="weightProgressChart"></canvas> 
+                </div> 
+    
+                <div class="insight-banner info" id="weightInsight"> 
+                    <i class="fa-solid fa-chart-line"></i> 
+                    <span id="weightInsightText"></span>
+                </div> 
+            </div> 
+    
+            <!-- 3. Activity & Calorie Burn --> 
+            <div class="glass-card card-span-7" id="activityTrendCard"> 
+                <div class="card-header" id="activityCardHeader"> 
+                    <h2 id="activityTrendTitle">Activity & Calorie Burn Trend</h2> 
+                    <span class="sub-heading-text" id="activitySubhead">Daily Calories Burned</span> 
+                </div> 
+    
+                <div class="chart-wrapper-bar" id="activityChartWrapper"> 
+                    <canvas id="activityTrendChart"></canvas> 
+                </div> 
+    
+                <div class="insight-banner success" id="activityInsight"> 
+                    <i class="fa-solid fa-bolt"></i> 
+                   <span id="activityInsightText"></span>
+                </div> 
+            </div> 
+    
+            <!-- 4. Macronutrient Overview --> 
+            <div class="glass-card card-span-5" id="macroOverviewCard"> 
+                <div class="card-header" id="macroCardHeader"> 
+                    <h2 id="macroOverviewTitle">Macronutrient Overview</h2> 
+                    <span class="sub-heading-text" id="macroSubhead">Grams & Percentage</span> 
+                </div> 
+    
+                <div class="macro-content-grid" id="macroContentGrid"> 
+                    <div class="chart-wrapper-macro" id="macroChartWrapper"> 
+                        <canvas id="macroNutrientChart"></canvas> 
+                    </div> 
+    
+                    <div class="macro-breakdown-list" id="macroBreakdownList"> 
+                        <div class="macro-stat-item protein" id="proteinStatItem"> 
+                            <div class="macro-info" id="proteinInfo"> 
+                                <span>Protein</span> 
+                                <strong id="proteinGrams"> -- </strong> 
+                            </div> 
+    
+                            <div class="progress-track" id="proteinProgressTrack"> 
+                                <div class="progress-fill" id="proteinBar" style="width: 0%;"></div> 
+                            </div> 
+                        </div> 
+    
+                        <div class="macro-stat-item carbs" id="carbsStatItem"> 
+                            <div class="macro-info" id="carbsInfo"> 
+                                <span>Carbs</span> 
+                                <strong id="carbsGrams"> -- </strong> 
+                            </div> 
+                            <div class="progress-track" id="carbsProgressTrack"><div class="progress-fill" id="carbsBar" style="width: 0%;"></div></div> 
+                        </div> 
+    
+                        <div class="macro-stat-item fats" id="fatsStatItem"> 
+                            <div class="macro-info" id="fatsInfo"> 
+                                <span>Fats</span> 
+                                <strong id="fatsGrams"> -- </strong> 
+                            </div> 
+                            <div class="progress-track" id="fatsProgressTrack"> 
+                                <div class="progress-fill" id="fatsBar" style="width: 0%;"></div> 
+                            </div> 
+                        </div> 
+                    </div> 
+                </div> 
+    
+                <div class="insight-banner warning" id="macroInsight"> 
+                    <i class="fa-solid fa-lightbulb"></i> 
+                    <span id="macroInsightText"></span>
+                </div> 
+    
+            </div> 
+    
+        </div> 
+    </main>
+    <script src="js/progress.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/session-timeout.js"></script>
+</body>
+</html>

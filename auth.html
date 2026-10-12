@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfghaNutri - User Setup</title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Font Awesome or Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/auth.css"> 
+</head>
+<body>
+    <div id="mainFormStage" class="app-window">
+        <div class="glass-card">
+            <!-- LEFT PANEL: Multi-Layer Material Shades Styling & Bubbly Dynamic Switch -->
+            <div class="sidebar-panel">
+                <div class="shade-layer layer-1"></div>
+                <div class="shade-layer layer-2"></div>
+                <div class="shade-layer layer-3"></div>
+
+                <div class="toggle-container" id="sidebarToggleWrapper">
+                    <div class="sliding-pill" id="slidingPill"></div>
+                    <button type="button" class="toggle-btn" id="tab-login" onclick="toggleSidebarView('login')">Login</button>
+                    <button type="button" class="toggle-btn" id="tab-signup" onclick="toggleSidebarView('signup')">Sign Up</button>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: User Setup -->
+            <div class="form-content-viewport">
+                <!-- VIEW A: LOGIN INTERFACE -->
+                <div id="loginViewPanel" class="form-view-panel">
+                    <div class="login-badge-icon">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+
+                    <h2 class="login-main-title">Login</h2>
+                    
+                    <form id="loginForm" onsubmit="executeLoginRoute(event)">
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-user"></i>
+                                <input type="email" id="logEmail" class="form-control" placeholder="Email" required>
+                            </div>
+                            <span class="error-msg">Email does not exist</span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="logPassword" class="form-control" placeholder="Password" required>
+                            </div>
+                            <span class="error-msg">Incorrect password</span>
+                        </div>
+
+                        <a href="#" class="forgot-password-anchor">Forgot Password?</a>
+
+                        <div style="display: flex; justify-content: flex-end;">
+                            <button type="submit" class="btn btn-primary" style="border-radius: 20px; padding: 10px 35px; margin: 0;">LOGIN</button>
+                        </div>
+                    </form>
+
+                    <div class="social-auth-footer">
+                        <span>Or Login With</span>
+                        
+                        <div class="social-links-row">
+                            <a href="#" class="social-anchor"><i class="fa-brands fa-google"></i> Google</a>
+                            <a href="#" class="social-anchor"><i class="fa-brands fa-facebook"></i> Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW B: MULTI-STEP USER DETAILS -->
+                 <div id="signupViewPanel" class="form-view-panel">
+                    <div class="progress-wrapper">
+                        <div class="progress-steps">
+                            <div class="progress-line-fill" id="wizardLineFill"></div>
+                            <div class="step-node active" data-node="1">1</div>
+                            <div class="step-node" data-node="2">2</div>
+                            <div class="step-node" data-node="3">3</div>
+                            <div class="step-node" data-node="4">4</div>
+                        </div>
+                    </div>
+
+                    <form id="onboardingWizardForm" onsubmit="event.preventDefault();">
+                        
+                        <!-- STEP 1: Personal Details -->
+                        <div class="wizard-step active" data-step="1">
+                            <h3 class="step-title">Personal Details</h3>
+                            
+                            <div class="form-group">
+                                <label>Full Name</label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-user"></i>
+                                    <input type="text" id="username" class="form-control" placeholder="Saeeda Ikhtiari" required>
+                                </div>
+
+                                <span class="error-msg">Please enter your name</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Gender</label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-venus-mars"></i>
+
+                                    <select id="gender" class="form-control" required>
+                                        <option value="" disabled selected>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+
+                                <span class="error-msg">Please choose options</span>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div class="form-group">
+                                    <label>Age</label>
+                                    
+                                    <div class="input-wrapper">
+                                        <i class="fa-solid fa-cake-candles"></i>
+                                        <input type="number" id="age" class="form-control" placeholder="Years" required>
+                                    </div>
+
+                                    <span class="error-msg">Invalid age</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Height (cm)</label>
+
+                                    <div class="input-wrapper">
+                                        <i class="fa-solid fa-ruler-vertical"></i>
+                                        <input type="number" id="height" class="form-control" placeholder="cm" required>
+                                    </div>
+
+                                    <span class="error-msg">Invalid height</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Weight (kg)</label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-weight-scale"></i>
+                                    <input type="number" id="weight" class="form-control" placeholder="kg" required>
+                                </div>
+
+                                <span class="error-msg">Invalid weight field</span>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2: Setting Goal -->
+                        <div class="wizard-step" data-step="2">
+                            <h3 class="step-title">Health Goal</h3>
+                            
+                            <div class="goal-stack">
+                                <div class="goal-box" onclick="assignHealthGoal('Lose', this)">
+                                    <i class="fa-solid fa-arrow-down-wide-short"></i>
+                                    <span class="goal-text">Lose Weight</span>
+                                </div>
+
+                                <div class="goal-box" onclick="assignHealthGoal('Gain', this)">
+                                    <i class="fa-solid fa-arrow-up-wide-short"></i>
+                                    <span class="goal-text">Gain Weight</span>
+                                </div>
+
+                                <div class="goal-box" onclick="assignHealthGoal('Maintain', this)">
+                                    <i class="fa-solid fa-equals"></i>
+                                    <span class="goal-text">Maintain Weight</span>
+                                </div>
+                            </div> 
+                            
+                            <div class="form-group" style="margin: 0;">
+                                <input type="hidden" id="selectedGoalField" required>
+                                <span class="error-msg" id="goalErrorMsg">Please select one objective to continue</span>
+                                <span class="goal-insight" id="goalInsightMsg"></span>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: Targeting Setting -->
+                        <div class="wizard-step" data-step="3">
+                            <h3 class="step-title">Target Setting</h3>
+                            
+                            <div class="form-group">
+                                <label>Target Weight (kg)</label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                    <input type="number" id="targetWeight" class="form-control" placeholder="Desired Weight (kg)" oninput="showTargetInsight()" required>
+                                </div>
+
+                                <span class="error-msg" id="targetWeightError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Time Period (months)</label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <input type="number" id="timePeriod" class="form-control" placeholder="Duration in months" oninput="showTargetInsight()" required>
+                                </div>
+
+                                <span class="error-msg">Please enter a valid time period.</span>
+                            </div>
+                        </div>
+
+                        <!-- STEP 4: Creating Account -->
+                        <div class="wizard-step" data-step="4">
+                            <h3 class="step-title">Create Account</h3>
+                            
+                            <div class="form-group">
+                                <label>Email Address</label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <input type="email" id="accountEmail" class="form-control" placeholder="user@domain.com" required>
+                                </div>
+
+                                <span class="error-msg" id="emailError"></span>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label>Password</label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <input type="password" id="accountPassword" class="form-control" placeholder="••••••••" required>
+                                </div>
+
+                                <span class="error-msg" id="passwordError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <input type="password" id="accountPasswordConfirm" class="form-control" placeholder="••••••••" required>
+                                </div>
+
+                                <span class="error-msg" id="confirmPasswordError"></span>
+                            </div>
+                        </div>
+
+                        <!-- User Setup Navigations Buttons -->
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="wizardBackBtn" onclick="stepTransition(-1)" style="display: none;">
+                                <i class="fa-solid fa-arrow-left"></i> Back
+                            </button>
+
+                            <button type="button" class="btn btn-primary" id="wizardNextBtn" onclick="stepTransition(1)">
+                                Next <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <span class="target-insight" id="targetInsightMsg"></span>
+                    </form>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-popup" id="successPopup">
+        <div class="success-box">
+            <i class="fa-solid fa-circle-check"></i>
+
+            <h3>Account Created!</h3>
+
+            <p>Your account has been created successfully. You can now log in.</p>
+
+            <button id="continueLoginBtn">
+                Continue to Login
+            </button>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script> 
+</body>
+</html>

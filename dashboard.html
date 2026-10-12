@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfghaNutri - Dashboard</title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Font Awesome or Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+    <!-- NAVIGATION SIDEBAR -->
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-header">
+                <div class="avatar-container">
+                    <img id="sidebarProfilePicture" src="images/blankProfilePicture.png" alt="Profile Avatar">
+                    <span class="status-dot"></span>
+                </div>
+
+                <h2 class="user-name" id="sidebarUserName"> -- </h2>
+
+                <p class="welcome-text">Welcome back to your health journey!</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link active-tab-container">
+                    <i class="fa-solid fa-chart-pie glow-icon"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="food-database.html" class="nav-link">
+                    <i class="fa-solid fa-database glow-icon"></i>
+                    <span>Foods</span>
+                </a>
+
+                <a href="food-log.html" class="nav-link">
+                    <i class="fa-solid fa-utensils glow-icon"></i>
+                    <span>Meal Log</span>
+                </a>
+
+                <a href="activity-log.html" class="nav-link">
+                    <i class="fa-solid fa-person-walking glow-icon"></i>
+                    <span>Activity Log</span>
+                </a>
+
+                <a href="progress.html" class="nav-link">
+                    <i class="fa-solid fa-arrow-trend-up glow-icon"></i>
+                    <span>Progress</span>
+                </a>
+
+                <a href="profile.html" class="nav-link">
+                    <i class="fa-regular fa-user glow-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="logo"></div>
+        </div>
+    </aside>
+
+    <!-- MAIN CANVAS -->
+    <main class="main-canvas">
+        <!-- DASHBOARD HEADER -->
+        <header class="dashboard-banner">
+            <div class="banner-content"> 
+                <h1>Welcome Back, <span id="username"> -- </span>!</h1> 
+                <p>Here's a snapshot of your nutrition, activity, and progress for today.</p> 
+            </div>
+
+            <div class="date-input-wrapper">
+                <i class="fa-regular fa-calendar-days"></i>
+                <input type="text" id="log-date-picker">
+            </div>
+        </header>
+
+        <!-- DASHBOARD GRID -->
+        <div class="dashboard-grid">
+            <!-- 1. Goal card -->
+            <section class="dashboard-card card-span-6">
+                <div class="card-header-row">
+                    <h3 class="card-title">Your Goal</h3>
+                    <i class="fa-solid fa-bullseye card-header-icon"></i>
+                </div>
+
+                <div class="goal-highlight">
+                    <span class="badge" id="goal-type"> -- </span>
+                    <h2 class="metric-large">
+                        <span id="goal-amount"> -- </span> <small>kg</small>
+                    </h2>
+                </div>
+
+                <div class="metrics-subgrid">
+                    <div class="metric-pill">
+                        <span class="label">Current</span>
+                        <span class="value" id="current-weight"> -- </span>
+                    </div>
+
+                    <div class="metric-pill">
+                        <span class="label">Target</span>
+                        <span class="value" id="target-weight"> -- </span>
+                    </div>
+
+                    <div class="metric-pill">
+                        <span class="label">Timeframe</span>
+                        <span class="value" id="goal-timeframe"> -- </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Weight Progress Card -->
+            <section class="dashboard-card card-span-6">
+                <div class="card-header-row">
+                    <h3 class="card-title">Weight Progress</h3>
+                    <i class="fa-solid fa-weight-scale card-header-icon"></i>
+                </div>
+
+                <div class="progress-header">
+                    <h2 class="metric-large">
+                        <span id="weight-progress">--</span>
+                        <small id="weight-progress-label">Complete</small>
+                    </h2>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="custom-progress-bar">
+                        <div class="progress-fill" id="weight-progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="progress-footer">
+                    <p>
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span id="weight-remaining">--</span>
+                        <span id="weight-remaining-label">remaining</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- 3. Daily Calory Overview -->
+            <section class="dashboard-card card-span-7">
+                <div class="card-header-row">
+                    <h3 class="card-title">Daily Calorie Overview</h3>
+                    <i class="fa-solid fa-chart-pie card-header-icon"></i>
+                </div>
+
+                <div class="split-view-container only-position">
+                    <div class="visualization-pane">
+                        <div class="donut-chart-wrapper">
+                            <svg viewBox="0 0 36 36" class="circular-chart">
+                                <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                <path class="circle-fill" id="calorie-progress-circle" stroke-dasharray="55.9, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            </svg>
+
+                            <div class="donut-text">
+                                <span class="donut-number" id="calories-remaining"> -- </span>
+                                <span class="donut-label">kcal left</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-legend">
+                        <div class="legend-item-pill">
+                            <div class="legend-meta">
+                                <span class="dot consumed-dot"></span>
+                                <span class="label">Consumed</span>
+                            </div>
+
+                            <div class="legend-values">
+                                <strong id="calories-consumed"> -- </strong>
+                                <span class="percentage" id="calories-consumed-percent"> -- </span>
+                            </div>
+                        </div>
+
+                        <div class="legend-item-pill">
+                            <div class="legend-meta">
+                                <span class="dot remaining-dot"></span>
+                                <span class="label">Remaining</span>
+                            </div>
+
+                            <div class="legend-values">
+                                <strong id="calories-remaining-legend"> -- </strong>
+                                <span class="percentage" id="calories-remaining-percent"> -- </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4 & 5. NESTED CALORIES METRICS AND MACROS -->
+            <div class="card-span-5 nested-vertical-stack">
+                <section class="dashboard-card">
+                    <h3 class="card-title">Calorie Metrics Breakdown</h3>
+
+                    <div class="metrics-grid-mini">
+                        <div class="metric-pill-mini">
+                            <span class="label"><i class="fa-solid fa-bullseye"></i> Goal</span>
+                            <span class="value"><span id="calorie-goal"> -- </span> <small>kcal</small></span>
+                        </div>
+
+                        <div class="metric-pill-mini">
+                            <span class="label"><i class="fa-solid fa-utensils"></i> Consumed</span>
+                            <span class="value"><span id="calorie-consumed-breakdown"> -- </span> <small>kcal</small></span>
+                        </div>
+
+                        <div class="metric-pill-mini">
+                            <span class="label"><i class="fa-solid fa-calculator"></i> Remaining</span>
+                            <span class="value"><span id="calorie-remaining-breakdown"> -- </span> <small>kcal</small></span>
+                        </div>
+
+                        <div class="metric-pill-mini">
+                            <span class="label"><i class="fa-solid fa-bolt"></i> Burned</span>
+                            <span class="value"><span id="calorie-burned"> -- </span> <small>kcal</small></span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="dashboard-card">
+                    <h3 class="card-title">Macronutrients Summary</h3>
+
+                    <div class="macros-flex-container">
+                        <div class="macro-stat-item">
+                            <div class="macro-label-row">
+                                <span class="macro-name">Protein</span>
+                                <span class="macro-amount"><strong id="protein-consumed"> -- </strong><small>/ <span id="protein-goal"> -- </span></small></span>
+                            </div>
+
+                            <div class="macro-progress-track"><div class="macro-fill-bar" id="macro-bar-protein" style="width: -- ;"></div></div>
+                        </div>
+
+                        <div class="macro-stat-item">
+                            <div class="macro-label-row">
+                                <span class="macro-name">Carbohydrates</span>
+                                <span class="macro-amount"><strong id="carbs-consumed"> -- </strong><small>/ <span id="carbs-goal"> -- </span></small></span>
+                            </div>
+
+                            <div class="macro-progress-track"><div class="macro-fill-bar" id="macro-bar-carbs" style="width: -- ;"></div></div>
+                        </div>
+
+                        <div class="macro-stat-item">
+                            <div class="macro-label-row">
+                                <span class="macro-name">Fat</span>
+                                <span class="macro-amount"><strong id="fat-consumed"> -- </strong><small>/ <span id="fat-goal"> -- </span></small></span>
+                            </div>
+                            
+                            <div class="macro-progress-track"><div class="macro-fill-bar" id="macro-bar-fat" style="width: -- ;"></div></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 7. Water Intake Card -->
+            <section class="dashboard-card card-span-4">
+                <div class="card-header-row">
+                    <h3 class="card-title">Hydration Progress</h3>
+                    <i class="fa-solid fa-droplet card-header-icon"></i>
+                </div>
+
+                <div class="water-widget-body">
+                    <div class="water-glass-display">
+                        <div class="fluid-wave-element" id="water-progress" style="height: --;"></div>
+
+                        <div class="water-numeric-overlay">
+                            <h2 class="metric-large" id="water-consumed"> -- </h2>
+                            <span class="units">/ <span id="water-goal"> -- </span> L</span>
+                        </div>
+                    </div>
+
+                    <span class="water-badge">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span id="water-percent"> -- </span> Met
+                    </span>
+                </div>
+            </section>
+
+            <!-- 8. Activity Summary -->
+            <section class="dashboard-card card-span-4">
+                <div class="card-header-row">
+                    <h3 class="card-title">Today's Activity</h3>
+                    <i class="fa-solid fa-heart-pulse card-header-icon"></i>
+                </div>
+                <div class="activity-rows-container">
+                    <div class="activity-row">
+                        <div class="icon-box minutes-bg"><i class="fa-solid fa-stopwatch"></i></div>
+                        <div class="activity-info">
+                            <span class="label">Active Duration</span>
+                            <strong class="value" id="activity-duration"> -- </strong>
+                        </div>
+                    </div>
+                    <div class="activity-row">
+                        <div class="icon-box calories-bg"><i class="fa-solid fa-fire"></i></div>
+                        <div class="activity-info">
+                            <span class="label">Total Burned</span>
+                            <strong class="value" id="activity-calories-burned"> -- </strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. Daily Insights -->
+            <section class="dashboard-card card-span-4">
+                <div class="card-header-row">
+                    <h3 class="card-title">Daily Insights</h3>
+                    <i class="fa-solid fa-wand-magic-sparkles card-header-icon"></i>
+                </div>
+
+                <ul class="insights-list" id="insights-list"></ul>
+            </section>
+        </div>
+    </main>
+
+    <!-- CUSTOM POPUP -->
+    <div id="customPopup" class="custom-popup-overlay">
+        <div class="custom-popup">
+            <div class="popup-icon-wrapper">
+                <i id="popupIcon" class="fa-solid fa-check"></i>
+            </div>
+
+            <h3 id="popupTitle"></h3>
+            <p id="popupMessage"></p>
+            <button type="button" id="popupCloseBtn" class="popup-close-btn">Continue</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> 
+    <script src="js/popup.js"></script>
+    <script src="js/dashboard.js"></script> 
+    <script src="js/navbar.js"></script>
+    <script src="js/session-timeout.js"></script>
+</body> 
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfghaNutri - Dashboard</title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Font Awesome or Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/activity-log.css">
+    <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+    <!-- NAVIGATION SIDEBAR -->
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-header">
+                <div class="avatar-container">
+                    <img id="sidebarProfilePicture" src="images/blankProfilePicture.png" alt="Profile Avatar">
+                    <span class="status-dot"></span>
+                </div>
+
+                <h2 class="user-name" id="sidebarUserName"> -- </h2>
+                <p class="welcome-text">Welcome back to your health journey!</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie glow-icon"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="food-database.html" class="nav-link">
+                    <i class="fa-solid fa-database glow-icon"></i>
+                    <span>Foods</span>
+                </a>
+
+                <a href="food-log.html" class="nav-link">
+                    <i class="fa-solid fa-utensils glow-icon"></i>
+                    <span>Meal Log</span>
+                </a>
+
+                <a href="activity-log.html" class="nav-link active-tab-container">
+                    <i class="fa-solid fa-person-walking glow-icon"></i>
+                    <span>Activity Log</span>
+                </a>
+
+                <a href="progress.html" class="nav-link">
+                    <i class="fa-solid fa-arrow-trend-up glow-icon"></i>
+                    <span>Progress</span>
+                </a>
+
+                <a href="profile.html" class="nav-link">
+                    <i class="fa-regular fa-user glow-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="logo"></div>
+        </div>
+    </aside>
+
+    <!-- MAIN CANVAS -->
+    <main class="main-canvas">
+        <div class="activity-canvas">
+            <!-- ACTIVITY LOG HEADER -->
+            <header class="activitylog-banner">
+                <div class="banner-content">
+                    <h1>Daily Activity Log</h1>
+                    <p>Record your daily physical activities and keep track of the calories you burn throughout the day.</p>
+                </div>
+                    
+                <div class="banner-action">
+                    <span class="date-stamp" id="today-date">
+                        <i class="fa-regular fa-calendar-days"></i>
+                    </span>
+                </div>
+            </header>
+            
+            <!-- ACTIVITY LOG GRID -->
+            <div class="activitylog-grid">
+
+                <!-- LEFT COLUMN -->
+                <div class="workspace-column card-span-7">
+                        
+                    <!-- 1. ACTIVITY ENTRY FORM -->
+                    <section class="glass-card">
+                        <div class="card-title-header">
+                            <div>
+                                <h2>Activity Entry Form</h2>
+                            </div>
+                            <div class="accent-circle-icon"><i class="fa-solid fa-file-pen"></i></div>
+                        </div>
+
+                        <form id="activity-log-form" class="interactive-activity-form">
+                            <div class="form-grid-layout">
+                                <div class="form-input-element">
+                                    <label for="activity-select">Select Activity</label>
+                                    <div class="custom-select-container">
+                                        <select id="activity-select" required>
+                                            <option value="Walking" selected> -- </option>
+                                        </select>
+                                        <i class="fa-solid fa-chevron-down select-chevron"></i>
+                                    </div>
+                                </div>
+
+                                <div class="form-input-element">
+                                    <label for="activity-duration">Duration (minutes)</label>
+                                    <input type="number" id="activity-duration" min="1" max="480" placeholder="e.g. 30" required>
+                                </div>
+
+                                <div class="form-input-element" style="grid-column: span 2;">
+                                    <label for="activity-intensity">Intensity Level</label>
+
+                                    <div class="custom-select-container">
+                                        <select id="activity-intensity" required>
+                                            <option value="light"> -- </option>
+                                        </select>
+
+                                        <i class="fa-solid fa-chevron-down select-chevron"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Exercise Preview Box -->
+                            <div class="exercise-preview-container">
+                                <div class="preview-meta-row">
+                                    <h4 id="preview-activity-title">Walking</h4>
+                                    <span class="preview-cal-badge" id="preview-burned-calories" style="background: #ea740c;">-- kcal</span>
+                                </div>
+                                <div class="preview-exercise">
+                                    <div class="exercise-tag"><span class="bullet e-bg"></span> Effort Rate: <strong id="preview-effort"> -- </strong></div>
+                                    <div class="exercise-tag"><span class="bullet m-bg"></span> MET Value: <strong id="preview-met"> -- </strong></div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="activity-entry-btn">Add Activity</button>
+                        </form>
+                    </section>
+
+                    <!-- 2. DAILY ACTIVITY SUMMARY CARD -->
+                    <section class="glass-card">
+                        <div class="card-title-header">
+                            <div>
+                                <h2>Daily Activity Summary</h2>
+                            </div>
+                            <div class="accent-circle-icon"><i class="fa-solid fa-calculator"></i></div>
+                        </div>
+
+                        <div class="numeric-summary-container">
+                            <div class="calorie-calc-grid">
+                                <div class="calc-block">
+                                    <span class="calc-label">Total Active Time</span>
+                                    <span class="calc-value" id="summary-active-time"> -- <small>mins</small></span>
+                                </div>
+
+                                <div class="calc-sign"><i class="fa-solid fa-bolt"></i></div>
+
+                                <div class="calc-block highlight-remaining">
+                                    <span class="calc-label" style="color: var(--gray);">Total Burned</span>
+                                    <span class="calc-value" id="summary-total-burned"> -- <small>kcal</small></span>
+                                </div>
+                            </div>
+
+                            <!-- Visualization Box: Pie Chart -->
+                            <div class="pie-chart-segment">
+                                <h5>Burn Distribution</h5>
+                                
+                                <div class="chart-flex-layout">
+                                    <div class="pie-chart-container" aria-label="Activity burn percentage chart">
+                                        <div class="pie-chart-visual" id="activity-pie-chart"></div>
+                                    </div>
+
+                                    <ul class="chart-legend-list" id="activity-chart-legend">
+                                    </ul>
+                                </div>
+
+                                <p class="chart-total-footer">
+                                    Total Today: <span class="highlight-cal" id="chart-total-burned"> -- kcal</span>
+                                </p>
+                            </div>
+                        </div>
+                    </section>   
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="workspace-column card-span-5">
+
+                    <!-- 1. TODAY'S OVERVIEW CARD -->
+                    <section class="glass-card active-log-board-panel">
+                        <div class="card-title-header">
+                            <div>
+                                <h2>Today's Logged Activities</h2>
+                            </div>
+                            <span class="counter-badge" id="activity-count">- Item Active</span>
+                        </div>
+
+                        <div class="board-timeline-container">    
+                            <div class="timeline-exercise-segment">
+                                <div class="segment-items-dropzone" id="activities-items-root">
+                                </div>
+                            </div>  
+                        </div>
+                    </section>
+
+                    <!-- 2. DAILY INSIGHTS PANEL -->
+                    <section class="glass-card" style="height: 100%;">
+                        <div class="card-title-header">
+                            <h2 class="card-title">Daily Insights</h2>
+                            <i class="fa-solid fa-wand-magic-sparkles accent-circle-icon"></i>
+                        </div>
+
+                        <ul class="insights-list" id="activity-insights-list"></ul>
+                    </section>
+                </div>     
+            </div>        
+        </div>
+    </main>
+
+    <!-- CUSTOM POPUP -->
+    <div id="customPopup" class="custom-popup-overlay">
+        <div class="custom-popup">
+            <div class="popup-icon-wrapper">
+                <i id="popupIcon" class="fa-solid fa-check"></i>
+            </div>
+
+            <h3 id="popupTitle"></h3>
+            <p id="popupMessage"></p>
+            <button type="button" id="popupCloseBtn" class="popup-close-btn">Continue</button>
+        </div>
+    </div>
+
+    <!-- DELETE ACCOUNT CONFIRMATION POPUP -->
+    <div id="deleteConfirmPopup" class="custom-popup-overlay">
+        <div class="custom-popup">
+            <div class="popup-icon-wrapper delete-popup-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <h3 id="deletePopupTitle"></h3>
+            <p id="deletePopupMessage"></p>
+
+            <div class="popup-button-wrapper">
+                <button type="button" id="deleteCancelBtn" class="popup-cancel-btn">Cancel</button>
+                <button type="button" id="deleteOkayBtn" class="popup-okay-btn">Okay</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/popup.js"></script>
+    <script src="js/activity-log.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/session-timeout.js"></script>
+</body>
+</html>

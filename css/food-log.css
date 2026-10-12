@@ -1,0 +1,683 @@
+:root {
+    --primary: #FF9F1C;
+    --primary-light: #FFF5E6;
+    --beige: #F8F4EC;
+    --gray: #666666;
+    --light-gray: #FAFAFA;
+    --text-muted: #8c8c8c;
+    --shade-0: #d97706;
+    --shade-1: #ea8a14;
+    --shade-2: #f59e0b;
+    --shade-3: #fbbf24;
+    --btn-color: #ea740c;
+    --btn-hover: #c25e0c;
+    --text-dark: #5C0A0A;
+    --white: #ffffff;
+    --box-shadow: rgba(255, 149, 0, 0.3);
+        }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--beige);
+    color: var(--text-dark);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* ----- MAIN CANVAS ----- */
+.main-canvas {
+    flex: 1;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: var(--beige);
+    padding: 40px;
+}
+
+/* Custom Scrollbar */
+.main-canvas::-webkit-scrollbar {
+    width: 8px;
+}
+.main-canvas::-webkit-scrollbar-track {
+    background: transparent;
+}
+.main-canvas::-webkit-scrollbar-thumb {
+    background: rgba(193, 116, 16, 0.2);
+    border-radius: 10px;
+}
+.main-canvas::-webkit-scrollbar-thumb:hover {
+    background: rgba(193, 116, 16, 0.4);
+}
+
+/* Foodlog Welcoming Header */
+.foodlog-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 1.7px solid rgba(255, 159, 28, 0.15);
+}
+
+.foodlog-banner h1 {
+    font-family: 'playfair display','poppins';
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    letter-spacing: -0.01em;
+}
+
+.foodlog-banner p {
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+    color: var(--gray);
+    margin-top: 4px;
+}
+
+.date-stamp {
+    background: var(--white);
+    padding: 10px 18px;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(92, 10, 10, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Foodlog grid */
+.foodlog-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.card-span-12 { grid-column: span 12; }
+.card-span-7  { grid-column: span 7; }
+.card-span-5  { grid-column: span 5; }
+
+.workspace-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 28px;
+    padding: 32px;
+    box-shadow: 0 24px 48px rgba(92, 10, 10, 0.06), 
+                0 4px 12px rgba(255, 159, 28, 0.05);
+    border: 1px solid rgba(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 32px 60px rgba(244, 229, 229, 0.06), 
+                0 6px 20px rgba(255, 159, 28, 0.05);
+}
+
+.card-title-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.card-title-header h2 {
+    font-size: 1.1rem;
+    color: var(--gray);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.accent-circle-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--shade-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* LEFT COLUMN */
+
+/*1. MEAL LOGGING CARD */
+.interactive-meal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.form-input-element {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-input-element label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.custom-select-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-input-element select, .form-input-element input {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(92, 10, 10, 0.16);
+    background: var(--light-gray);
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    outline: none;
+    appearance: none;
+    transition: all 0.1s ease;
+}
+
+.select-chevron {
+    position: absolute;
+    right: 14px;
+    font-size: 0.75rem;
+    color: var(--gray);
+    pointer-events: none;
+}
+
+.form-input-element select:focus, .form-input-element input:focus {
+    border-color: var(--primary);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(255, 159, 28, 0.12);
+}
+
+.food-preview-container {
+    background-color: var(--primary-light);
+    border: 1px solid var(--shade-1);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.preview-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#preview-title {
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.preview-cal-badge {
+    background: var(--shade-1);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.preview-macro-flex {
+    display: flex;
+    gap: 22px;
+}
+
+.macro-tag {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.macro-tag strong { color: var(--text-dark); font-weight: 600; }
+
+.bullet { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.p-bg { background: maroon; }
+.c-bg { background: #d97706; }
+.f-bg { background: rgb(255, 191, 0); }
+
+.food-entry-btn {
+    width: 40%;
+    margin: auto;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    background: var(--btn-color);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.25);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.food-entry-btn:hover {
+    background: var(--btn-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.35);
+}
+
+/*2. WEIGHT & HYDRATION TRACKERS */
+/* Weight Tracker */
+.dual-tracker-layout-row {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 16px;
+}
+
+.utility-title-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.utility-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.wt-icon { background: var(--primary-light); color: var(--btn-color); }
+.hy-icon { background: #e0f2fe; color: #0369a1; }
+
+.utility-title-block h3 {
+    font-size: 1.2rem;
+    color: var(--text-dark);
+}
+
+.utility-descriptor {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.4;
+    margin-bottom: auto;
+    padding-bottom: 12px;
+}
+
+.utility-action-row {
+    display: flex;
+    gap: 12px;
+}
+
+.utility-action-row input {
+    flex: 1;
+    padding: 9px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(92, 10, 10, 0.15);
+    background: var(--light-gray);
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.utility-save-btn {
+    width: 40px;
+    background: var(--btn-color);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.utility-save-btn:hover { background: var(--btn-hover); transform: translateY(-2px); }
+
+/* Hydration Tracker */
+.hydration-stats-readout {
+    display: flex;
+    justify-content: space-between;
+    background: var(--light-gray);
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.hydration-stats-readout strong { color: var(--text-dark); }
+.hydration-stats-readout .color-alert { color: #0284c7; }
+
+.hydration-action-bar {
+    display: flex;
+    gap: 10px;
+}
+
+.water-add-btn {
+    flex: 1;
+    padding: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    color: #0369a1;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all 0.2s;
+}
+
+.water-add-btn:hover {
+    background: #e0f2fe;
+    border-color: #7dd3fc;
+    transform: translateY(-2px);
+}
+
+/*3. Daily Insights */
+.insights-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+}
+
+.insight-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    align-items: flex-start;
+    line-height: 1.4;
+    border: 1px solid transparent;
+}
+
+.insight-item i { margin-top: 2px; font-size: 1.1rem; }
+.insight-success { background: #ecfdf5; color: #065f46; border-color: #d1fae5; }
+.insight-warning { background: #fffbeb; color: #92400e; border-color: #fef3c7; }
+.insight-info { background: #f0f9ff; color: #075985; border-color: #e0f2fe; }
+
+/* RIGHT COLUMN */
+
+/* 1. DAILY NUTRITION CARD */
+.numeric-summary-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.calorie-calc-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--light-gray);
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.calc-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.calc-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--gray);
+}
+
+.calc-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.calc-value small {
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.calc-sign {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.highlight-remaining .calc-value {
+    color: #059669;
+}
+
+.summary-macros-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.macro-metric-box {
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.06);
+    padding: 12px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.macro-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--gray);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.macro-values {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.macro-values small {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* 2. TODAY'S OVERVIEW CARD */   
+.counter-badge {
+    background: rgba(13, 223, 13, 0.241);
+    color: green;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 14px;
+}
+
+/* Custom Scrollbar */
+.board-timeline-container::-webkit-scrollbar {
+    width: 8px;
+}
+.board-timeline-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+.board-timeline-container::-webkit-scrollbar-thumb {
+    background: rgba(193, 116, 16, 0.2);
+    border-radius: 10px;
+}
+.board-timeline-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(193, 116, 16, 0.4);
+}
+
+.board-timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 500px ;
+    overflow: scroll;
+}
+
+.timeline-meal-segment {
+    background: var(--primary-light);
+    border-radius: 16px;
+    padding: 14px;
+    border: 1px solid rgba(92, 10, 10, 0.04);
+}
+
+.segment-meta-header h5 {
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.segment-items-dropzone {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.logged-food-row-item {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 15px;
+    border: 1px solid rgba(92, 10, 10, 0.05);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.item-primary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.item-identity h4 {
+    font-size: 1.05rem;
+    color: var(--text-dark);
+}
+
+.item-serving-metric {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-top: 4px;
+}
+
+.highlight-cal {
+    color: var(--btn-color);
+    font-weight: 700;
+}
+
+.log-item-delete-btn {
+    background: transparent;
+    border: none;
+    color: var(--btn-color);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.log-item-delete-btn:hover { opacity: 1; }
+
+.item-macro-pill-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.macro-pill {
+    background: var(--light-gray);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray);
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.empty-state-card {
+    text-align: center;
+    padding: 12px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 1270px) {
+    .card-span-7, .card-span-5, .card-span-4, .card-span-6 { 
+        grid-column: span 12; 
+    }
+    .kpi-metrics-strip { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    .dashboard-hero-banner { 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 16px; 
+    }
+    .date-picker-card { 
+        width: 100%; 
+    }
+}
+
+@media (max-width: 1100px) {
+    .sidebar {width: 220px;}
+}
+
+@media (max-width: 845px) {
+    .kpi-metrics-strip, .meal-breakdown-row, .dual-tracker-layout-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 770px) {
+    .preview-macro-flex {display: grid; grid-template-columns: 1fr 1fr;}
+}
+
+@media (max-width: 650px) {
+    .sidebar { display: none;}
+}
+
+@media (max-width: 550px) {
+    .preview-macro-flex {display: grid; grid-template-columns: 1fr;}
+}

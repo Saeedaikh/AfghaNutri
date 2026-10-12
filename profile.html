@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfghaNutri - Dashboard</title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Font Awesome or Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/popup.css">
+</head>
+<body>
+    <!-- NAVIGATION SIDEBAR -->
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-header">
+                <div class="avatar-container">
+                    <img id="sidebarProfilePicture" src="images/blankProfilePicture.png" alt="Profile Avatar">
+                    <span class="status-dot"></span>
+                </div>
+
+                <h2 class="user-name" id="sidebarUserName"> -- </h2>
+
+                <p class="welcome-text">Welcome back to your health journey!</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie glow-icon"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="food-database.html" class="nav-link">
+                    <i class="fa-solid fa-database glow-icon"></i>
+                    <span>Foods</span>
+                </a>
+
+                <a href="food-log.html" class="nav-link">
+                    <i class="fa-solid fa-utensils glow-icon"></i>
+                    <span>Meal Log</span>
+                </a>
+
+                <a href="activity-log.html" class="nav-link">
+                    <i class="fa-solid fa-person-walking glow-icon"></i>
+                    <span>Activity Log</span>
+                </a>
+
+                <a href="progress.html" class="nav-link">
+                    <i class="fa-solid fa-arrow-trend-up glow-icon"></i>
+                    <span>Progress</span>
+                </a>
+
+                <a href="profile.html" class="nav-link active-tab-container">
+                    <i class="fa-regular fa-user glow-icon"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="logo"></div>
+        </div>
+    </aside>
+
+    <!-- MAIN CANVAS -->
+    <main class="main-canvas">
+        <div class="profile-content-container">
+            
+            <!-- PROFILE HEADER CARD -->
+            <div class="profile-hero-card">
+                <div class="hero-main-details">
+                    <div class="hero-avatar-wrapper">
+                        <img id="profilePicture" src="images/blankProfilePicture.png" alt="User Profile">
+                        
+                        <!-- Camera button -->
+                        <div class="avatar-edit-icon" id="profilePictureEdit" title="Change Avatar">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+
+                        <!-- Hidden file input -->
+                        <input type="file"
+                            id="profilePictureInput"
+                            accept="image/jpeg, image/png, image/jpg, image/webp"
+                            hidden>
+                    </div>
+                    
+                    <div class="hero-text-content">
+                        <h1>Manage Your Profile!</h1>
+                        <p>Manage your account settings, personal details, and active health targets.</p>
+                    </div>
+                </div>
+
+                <div class="hero-quick-stats">
+                    <div class="quick-stat-card">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <div class="quick-stat-info">
+                            <span>Goal</span>
+                            <strong id="heroGoal"> -- </strong>
+                        </div>
+                    </div>
+
+                    <div class="quick-stat-card">
+                        <i class="fa-solid fa-weight-scale"></i>
+                        <div class="quick-stat-info">
+                            <span>Target</span>
+                            <strong id="heroTargetWeight"> -- </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HORIZONTAL NAVIGATION TABS -->
+            <div class="profile-nav-tabs">
+                <button type="button" class="tab-btn active" onclick="switchProfileTab('account-details', this)">
+                     Account Details
+                </button>
+
+                <button type="button" class="tab-btn" onclick="switchProfileTab('change-password', this)">
+                     Change Password
+                </button>
+
+                <button type="button" class="tab-btn" onclick="switchProfileTab('set-goals', this)">
+                     Set Goals
+                </button>
+
+                <button type="button" class="tab-btn danger-tab" onclick="switchProfileTab('delete-account', this)">
+                     Delete Account
+                </button>
+
+                <button type="button" class="tab-btn" onclick="handleLogout()">
+                     Logout
+                </button>
+            </div>
+
+            <!-- TOGGLE CARDS -->
+
+            <!-- 1. Account Details -->
+            <div id="account-details" class="glass-card profile-section-card active">
+                <div class="section-header-title">
+                    Personal Account Details
+                </div>
+
+                <form id="accountDetailsForm">
+                    <div class="form-group-custom">
+                        <label for="profileName">Full Name</label>
+                        <div class="input-icon-field">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" id="profileName" placeholder="Saeeda Ikhtiari" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row-2col">
+                        <div class="form-group-custom">
+                            <label for="profileEmail">Email Address</label>
+                            <div class="input-icon-field">
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="email" id="profileEmail" placeholder="user@domain.com" required>
+                            </div>
+                            <span id="profileEmailError" class="error-msg"></span>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label for="profileGender">Gender</label>
+                            <div class="input-icon-field">
+                                <i class="fa-solid fa-venus-mars"></i>
+                                <input type="text" id="profileGender" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row-2col">
+                        <div class="form-group-custom">
+                            <label for="profileAge">Age</label>
+                            <div class="input-icon-field">
+                                <i class="fa-solid fa-cake-candles"></i>
+                                <input type="number" id="profileAge" placeholder="Years" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label for="profileHeight">Height (cm)</label>
+                            <div class="input-icon-field">
+                                <i class="fa-solid fa-ruler-vertical"></i>
+                                <input type="number" id="profileHeight" placeholder="cm" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label for="profileWeight">Weight (kg)</label>
+                        <div class="input-icon-field">
+                            <i class="fa-solid fa-weight-scale"></i>
+                            <input type="number" id="profileWeight" placeholder="kg" required>
+                        </div>
+                    </div>
+
+                    <div class="save-btn-wrapper">
+                        <button type="submit" class="activity-entry-btn">
+                             Save Details
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 2. Change Password -->
+            <div id="change-password" class="glass-card profile-section-card">
+                <div class="section-header-title">
+                    Security & Password
+                </div>
+
+                <form id="changePasswordForm">
+                    <div class="form-group-custom">
+                        <label for="oldPassword">Old Password</label>
+                        <div class="input-icon-field">
+                            <i class="fa-solid fa-lock-open"></i>
+                            <input type="password" id="oldPassword" placeholder="••••••••" required>
+                        </div>
+                        <span id="oldPasswordError" class="error-msg"></span>
+                    </div>
+
+                    <div class="form-row-2col">
+                        <div class="form-group-custom">
+                            <label for="accountPassword">New Password</label>
+                            <div class="input-icon-field">
+                                <i class="fa-solid fa-lock"></i>
+                                <input type="password" id="accountPassword" placeholder="••••••••" required>
+                            </div>
+                            <span id="accountPasswordError" class="error-msg"></span>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label for="accountPasswordConfirm">Confirm New Password</label>
+                            <div class="input-icon-field">
+                                <i class="fa-solid fa-key"></i>
+                                <input type="password" id="accountPasswordConfirm" placeholder="••••••••" required>
+                            </div>
+                            <span id="accountPasswordConfirmError" class="error-msg"></span>
+                        </div>
+                    </div>
+
+                    <div class="save-btn-wrapper">
+                        <button type="submit" class="activity-entry-btn">
+                             Update Password
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 3. Set Goals -->
+            <div id="set-goals" class="glass-card profile-section-card">
+                <div class="section-header-title">
+                    Health & Weight Trajectory Goals
+                </div>
+
+                <form id="goalForm">
+                    <div class="form-group-custom">
+                        <label>Select Objective</label>
+                    </div>
+                    
+                    <div class="goal-selection-grid">
+                        <div class="profile-goal-card">
+                            <i class="fa-solid fa-arrow-down-wide-short"></i>
+                            <span>Lose Weight</span>
+                        </div>
+
+                        <div class="profile-goal-card">
+                            <i class="fa-solid fa-arrow-up-wide-short"></i>
+                            <span>Gain Weight</span>
+                        </div>
+
+                        <div class="profile-goal-card">
+                            <i class="fa-solid fa-equals"></i>
+                            <span>Maintain Weight</span>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="profileGoal">
+
+                    <div class="form-row-2col">
+                        <div class="form-group-custom">
+                            <label for="profileTargetWeight">Target Weight (kg)</label>
+                            <div class="input-icon-field">
+                                <i class="fa-solid fa-bullseye"></i>
+                                <input type="number" id="profileTargetWeight" placeholder="Desired Weight (kg)" required>
+                            </div>
+                            <span id="profileTargetWeightError" class="error-msg"></span>
+                        </div>
+
+                        <div class="form-group-custom">
+                            <label for="profileTimePeriod">Time Frame (months)</label>
+                            <div class="input-icon-field">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <input type="number" id="profileTimePeriod" placeholder="Duration in months" required>
+                            </div>
+                            <span id="profileTimePeriodError" class="error-msg"></span>
+                        </div> 
+                    </div>
+
+                    <small id="goalRecommendation" class="goal-recommendation"></small>
+
+                    <div class="save-btn-wrapper">
+                        <button type="submit" class="activity-entry-btn">
+                             Update Goals
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 4. Delete Account -->
+            <div id="delete-account" class="glass-card profile-section-card">
+                <div class="section-header-title" style="color: #dc2626;">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Danger Zone
+                </div>
+
+                <div class="danger-box">
+                    <i class="fa-solid fa-user-xmark"></i>
+                    <h3>Delete Account Confirmation</h3>
+                    <p>Are you sure you want to delete your account? This action is permanent and will wipe out all your saved nutritional logs, progress trajectory, and health preferences.</p>
+                    
+                    <button type="button" id="deleteAccountBtn" class="btn-danger">
+                         Permanently Delete My Account
+                    </button>
+                </div>
+            </div>
+        </div>  
+    </main>
+
+    <!-- CUSTOM POPUP -->
+    <div id="customPopup" class="custom-popup-overlay">
+        <div class="custom-popup">
+            <div class="popup-icon-wrapper">
+                <i id="popupIcon" class="fa-solid fa-check"></i>
+            </div>
+
+            <h3 id="popupTitle"></h3>
+            <p id="popupMessage"></p>
+            <button type="button" id="popupCloseBtn" class="popup-close-btn">Continue</button>
+        </div>
+    </div>
+
+    <!-- DELETE ACCOUNT CONFIRMATION POPUP -->
+    <div id="deleteConfirmPopup" class="custom-popup-overlay">
+        <div class="custom-popup">
+            <div class="popup-icon-wrapper delete-popup-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <h3 id="deletePopupTitle"></h3>
+            <p id="deletePopupMessage"></p>
+
+            <div class="popup-button-wrapper">
+                <button type="button" id="deleteCancelBtn" class="popup-cancel-btn">Cancel</button>
+                <button type="button" id="deleteOkayBtn" class="popup-okay-btn">Okay</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/popup.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/session-timeout.js"></script>
+</body>
+</html>

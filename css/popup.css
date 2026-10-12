@@ -1,0 +1,125 @@
+/* 5. Custom popup */
+.custom-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(162, 84, 16, 0.35);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.custom-popup-overlay.show {
+    display: flex;
+}
+
+.custom-popup {
+    width: min(420px, 90%);
+    background: var(--white);
+    border-radius: 28px;
+    padding: 35px 30px;
+    text-align: center;
+    box-shadow: 0 25px 70px rgba(92, 10, 10, 0.25);
+    animation: popupScaleIn 0.25s ease-out;
+}
+
+.popup-icon-wrapper {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 18px auto;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--btn-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem;
+}
+
+.custom-popup h3 {
+    color: var(--text-dark);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.custom-popup p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.popup-close-btn {
+    background: var(--btn-color);
+    color: var(--white);
+    border: none;
+    padding: 11px 32px;
+    border-radius: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.popup-close-btn:hover {
+    background: var(--btn-hover);
+    transform: translateY(-2px);
+}
+
+/* Delete Pop-up */
+.delete-popup-icon {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.popup-button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.popup-cancel-btn {
+    background: #f3f4f6;
+    color: var(--text-dark);
+    border: 1px solid #d1d5db;
+    padding: 11px 28px;
+    border-radius: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.popup-cancel-btn:hover {
+    background: #e5e7eb;
+    transform: translateY(-2px);
+}
+
+.popup-okay-btn {
+    background: #dc2626;
+    color: var(--white);
+    border: none;
+    padding: 11px 28px;
+    border-radius: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.popup-okay-btn:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+}
+
+@keyframes popupScaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
